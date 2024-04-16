@@ -13,10 +13,11 @@ export const App = () => {
   const [updateToggle, setUpdateToggle] = useState(false)
 
   useEffect(() => {
-    getJokes().then(setJokes)
-    setToldJokes(jokes.filter((joke) => joke.told === true))
-    setUntoldJokes(jokes.filter((joke) => joke.told === false))
-    setUpdateToggle(true)
+    getJokes().then(freshJokes => {
+      setJokes(freshJokes)
+      setToldJokes(freshJokes.filter((joke) => joke.told === true))
+      setUntoldJokes(freshJokes.filter((joke) => joke.told === false))
+    })
   }, [])
 
   useEffect(() => {
